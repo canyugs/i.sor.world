@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    async function redirect() {
+      // 取得目前的路徑作為短代碼
+      const shortCode = window.location.pathname.replace("/", "").trim();
+      if (!shortCode) {
+        document.body.innerHTML = "<h1>URL not found</h1>";
+        return;
+      }
+
+      // 呼叫 Google Apps Script API 獲取原始網址
+      const apiEndpoint = "https://script.google.com/a/macros/miparty.org/s/AKfycbxtrWhxIRM125LI3pANSECRv7-idRehJ1qOkmpbUmbguHA3_WBGdwMH37XbLi-m-6wZ/exec";
+      try {
+        const response = await fetch(`${apiEndpoint}?short_code=${shortCode}`);
+        const data = await response.json();
+
+        if (data.original_url) {
+          // 跳轉到原始網址
+          window.location.href = data.original_url;
+        } else {
+          document.body.innerHTML = "<h1>URL not found</h1>";
+        }
+      } catch (error) {
+        document.body.innerHTML = "<h1>Error fetching URL</h1>";
+        console.error(error);
+      }
+    }
+
+    // 呼叫跳轉函式
+    redirect();
+  </script>
+</head>
+<body></body>
+</html>
