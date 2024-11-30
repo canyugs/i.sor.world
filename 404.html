@@ -5,7 +5,7 @@
     <script>
         async function handleRedirect() {
             const shortCode = window.location.pathname.slice(1);
-            const apiUrl = 'https://script.google.com/a/macros/miparty.org/s/AKfycbxtrWhxIRM125LI3pANSECRv7-idRehJ1qOkmpbUmbguHA3_WBGdwMH37XbLi-m-6wZ/exec?code=' + shortCode;
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbzghqMPfEPJ4yqz25snpk_qDcphnJ9xtZ-lIRQRM1wEKko2xkSWlHUKR6T39n91kEg/exec?code=' + shortCode;
 
             try {
                 const response = await fetch(apiUrl);
