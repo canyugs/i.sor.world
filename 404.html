@@ -1,30 +1,133 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>URL Shortener</title>
-    <script>
-        async function handleRedirect() {
-            const shortCode = window.location.pathname.slice(1);
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbzghqMPfEPJ4yqz25snpk_qDcphnJ9xtZ-lIRQRM1wEKko2xkSWlHUKR6T39n91kEg/exec?code=' + shortCode;
+  <style>
+    body {
+      background: linear-gradient(135deg, #ef857d 0%, #f5af7e 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
 
-            try {
-                const response = await fetch(apiUrl);
-                const result = await response.json();
+    .container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
 
-                if (result.status === 'success') {
-                    window.location.href = result.message;
-                } else {
-                    document.body.innerHTML = 'URL Not Found';
-                }
-            } catch (error) {
-                document.body.innerHTML = 'Redirect Error';
-            }
+    h1 {
+      font-size: 4rem;
+      color: #ff6b6b;
+      margin-bottom: 0.5rem;
+      text-shadow: 3px 3px 0 #4ecdc4;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .joy-icon {
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+
+      img {
+        width: 300px;
+      }
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #4ecdc4;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(78, 205, 196, 0.5);
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ff6b6b;
+      animation: confetti-fall 5s linear infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+      }
+
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+  <title>短網址</title>
+  <script>
+    async function handleRedirect() {
+      const shortCode = window.location.pathname.slice(1);
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbzghqMPfEPJ4yqz25snpk_qDcphnJ9xtZ-lIRQRM1wEKko2xkSWlHUKR6T39n91kEg/exec?code=' + shortCode;
+
+      try {
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          window.location.href = result.message;
+        } else {
+          document.body.innerHTML = `<div class="container">
+      <div class="joy-icon">
+        <img src="./images/vacation_andy.webp" alt="安迪哥" />
+      </div>
+      <h1>哎呀！找不到這個頁面呢？</h1>
+      <p>您尋找的頁面好像去度假了！</p>
+      <a href="https://www.youtube.com/channel/UCvjo8UmRgFrloH6ZlmuO93w" class="back-link" target="_blank">那來看看我們的歌曲吧！</a>
+    </div>`;
         }
+      } catch (error) {
+        document.body.innerHTML = '轉送失敗了';
+      }
+    }
 
-        window.onload = handleRedirect;
-    </script>
+    window.onload = handleRedirect;
+  </script>
+  
 </head>
+
 <body>
-    Redirecting...
+  正在轉送中...
 </body>
+
 </html>
