@@ -27,7 +27,7 @@
       font-size: 4rem;
       color: #ff6b6b;
       margin-bottom: 0.5rem;
-      text-shadow: 3px 3px 0 #4ecdc4;
+      text-shadow: 3px 3px 0 #d4e1e0;
     }
 
     p {
@@ -64,12 +64,15 @@
       box-shadow: 0 4px 10px rgba(78, 205, 196, 0.5);
     }
 
-    .confetti {
+    .sparkle {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #ff6b6b;
-      animation: confetti-fall 5s linear infinite;
+      width: 4px;
+      height: 4px;
+      background-color: #FFD700;
+      border-radius: 50%;
+      filter: blur(1px);
+      box-shadow: 0 0 10px #FFD700;
+      animation: sparkle-spread 3s linear infinite;
     }
 
     @keyframes bounce {
@@ -84,13 +87,22 @@
       }
     }
 
-    @keyframes confetti-fall {
+    @keyframes sparkle-spread {
       0% {
-        transform: translateY(-100vh) rotate(0deg);
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        transform: translate(calc(cos(var(--angle)) * 200px),
+            calc(sin(var(--angle)) * 200px)) scale(1);
+        opacity: 1;
       }
 
       100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translate(calc(cos(var(--angle)) * 400px),
+            calc(sin(var(--angle)) * 400px)) scale(0);
+        opacity: 0;
       }
     }
   </style>
@@ -111,23 +123,52 @@
       <div class="joy-icon">
         <img src="./images/vacation_andy.webp" alt="安迪哥" />
       </div>
-      <h1>哎呀！找不到這個頁面呢？</h1>
+      <h1>哎呀！<br>找不到這個頁面呢...</h1>
       <p>您尋找的頁面好像去度假了！</p>
-      <a href="https://www.youtube.com/channel/UCvjo8UmRgFrloH6ZlmuO93w" class="back-link" target="_blank">那來看看我們的歌曲吧！</a>
+      <a href="https://www.youtube.com/channel/UCvjo8UmRgFrloH6ZlmuO93w" class="back-link" target="_blank">那來聽聽我們的歌曲如何?</a>
     </div>`;
         }
       } catch (error) {
-        document.body.innerHTML = '轉送失敗了';
+        document.body.appendChild('轉送失敗了');
       }
     }
 
     window.onload = handleRedirect;
   </script>
-  
+
 </head>
 
 <body>
-  正在轉送中...
+  <div class="container">
+    <img src="./images/magician_andy.webp" alt="安迪哥" />
+    <div>安迪哥正在試著變魔術...</div>
+  </div>
+  <script>
+     // 創建火花效果
+     for (let i = 0; i < 30; i++) {
+      const container = document.querySelector('.container');
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      
+      // 計算發散角度（0-360度）
+      const angle = (i * 12) + Math.random() * 30; // 12 = 360/30，讓火花均勻分布
+      sparkle.style.setProperty('--angle', `${angle}deg`);
+      
+      // 設置火花初始位置為容器中心
+      sparkle.style.top = '45%';
+      sparkle.style.left = '50%';
+      
+      sparkle.style.animationDelay = Math.random() * 3 + "s";
+      
+      // 隨機火花顏色
+      const colors = ['#FFD700', '#FFA500', '#FF6B6B', '#FFFFFF'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      sparkle.style.backgroundColor = randomColor;
+      sparkle.style.boxShadow = `0 0 10px ${randomColor}`;
+      
+      container.appendChild(sparkle);
+    }
+  </script>
 </body>
 
 </html>
