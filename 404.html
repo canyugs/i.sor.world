@@ -139,36 +139,9 @@
 </head>
 
 <body>
-  <div class="container">
-    <img src="./images/magician_andy.webp" alt="安迪哥" />
-    <div>安迪哥正在試著變魔術...</div>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif; color: #666;">
+    轉址中...
   </div>
-  <script>
-     // 創建火花效果
-     for (let i = 0; i < 30; i++) {
-      const container = document.querySelector('.container');
-      const sparkle = document.createElement("div");
-      sparkle.classList.add("sparkle");
-      
-      // 計算發散角度（0-360度）
-      const angle = (i * 12) + Math.random() * 30; // 12 = 360/30，讓火花均勻分布
-      sparkle.style.setProperty('--angle', `${angle}deg`);
-      
-      // 設置火花初始位置為容器中心
-      sparkle.style.top = '45%';
-      sparkle.style.left = '50%';
-      
-      sparkle.style.animationDelay = Math.random() * 3 + "s";
-      
-      // 隨機火花顏色
-      const colors = ['#FFD700', '#FFA500', '#FF6B6B', '#FFFFFF'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      sparkle.style.backgroundColor = randomColor;
-      sparkle.style.boxShadow = `0 0 10px ${randomColor}`;
-      
-      container.appendChild(sparkle);
-    }
-  </script>
 </body>
 
 </html>
